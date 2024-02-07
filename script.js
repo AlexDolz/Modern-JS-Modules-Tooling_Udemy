@@ -85,3 +85,14 @@ shoppingCart2.addToCart('apple', 4);
 shoppingCart2.addToCart('pizza', 2);
 console.log(shoppingCart2);
 console.log(shoppingCart2.shippingCost);
+
+// ******************* CommonJS modules *****************************
+
+// Export
+// export.addToCart =  function (product, quantity) {
+//   cart.push({ product, quantity });
+//   console.log(`${quantity} ${product} added to cart`);
+// };
+
+// Import
+// const {addToCart} = require('./shoppingCart.js')
