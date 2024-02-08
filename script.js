@@ -55,8 +55,10 @@ console.log(lastPost);
 // lastPost.then(last => console.log(last));
 
 // *************************************
-const lastPost2 = await getLastPost();
-console.log(lastPost2);
+(async () => {
+  const lastPost2 = await getLastPost();
+  console.log(lastPost2);
+})();
 
 const shoppingCart2 = (function () {
   const cart = [];
@@ -97,7 +99,8 @@ console.log(shoppingCart2.shippingCost);
 // Import
 // const {addToCart} = require('./shoppingCart.js')
 
-import cloneDeep from './node_modules/lodash-es/cloneDeep.js';
+// import cloneDeep from './node_modules/lodash-es/cloneDeep.js';
+import cloneDeep from 'lodash-es';
 
 const state = {
   cart: [
@@ -118,3 +121,7 @@ const state = {
 // Deep clone in npm
 const stateDeepClone = cloneDeep(state);
 console.log(stateDeepClone);
+
+if (module.hot) {
+  module.hot.accept();
+}

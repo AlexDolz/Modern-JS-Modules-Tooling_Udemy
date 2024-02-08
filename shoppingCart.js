@@ -1,10 +1,14 @@
 // Exporting module
 console.log('Exporting module');
 
-// Blocking code
-console.log('Start fetching users');
-await fetch('https://jsonplaceholder.typicode.com/users');
-console.log('Finish fetching users');
+async function fetchData() {
+  // Blocking code
+  console.log('Start fetching users');
+  await fetch('https://jsonplaceholder.typicode.com/users');
+  console.log('Finish fetching users');
+}
+
+fetchData(); // Call the async function to initiate fetching
 
 const shippingCost = 10;
 export const cart = [];
