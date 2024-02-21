@@ -19,7 +19,7 @@ const spendingLimits = Object.freeze({
 // Object.free() - to not mutate object
 
 // Pure function
-const getLimit = user => spendingLimits?.[user] ?? 0;
+const getLimit = (limits, user) => limits?.[user] ?? 0;
 const addExpense = function (
   state,
   limits,
@@ -29,7 +29,7 @@ const addExpense = function (
 ) {
   const cleanUser = user.toLowerCase();
 
-  return value <= getLimit(cleanUser)
+  return value <= getLimit(limits, cleanUser)
     ? [...state, { value: -value, description, user: cleanUser }]
     : state;
 };
@@ -44,12 +44,14 @@ const newBudget2 = addExpense(
 );
 const newBudget3 = addExpense(newBudget2, spendingLimits, 200, 'Stuff', 'Jay');
 
-const checkExpenses = function () {
-  for (const entry of budget)
-    if (entry.value < -getLimit(entry.user)) entry.flag = 'limit';
-};
+const checkExpenses = (state, limits) =>
+  state.map(entry => {
+    entry.value < -getLimit(limits, entry.user)
+      ? { ...entry, flag: 'limit' }
+      : entry;
+  });
 
-checkExpenses();
+checkExpenses(newBudget3, spendingLimits);
 
 const logBigExpenses = function (bigLimit) {
   let output = '';
